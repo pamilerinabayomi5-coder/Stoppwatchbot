@@ -32,7 +32,8 @@ async def history_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
     msg = "📜 *Your Last 10 Sessions:*\n\n"
     for idx, r in enumerate(records, 1):
-        msg += f"{idx}\. `{r['total_elapsed']}` \(Ended: {escape_markdown(format_iso_to_readable(r['stop_time']))}\)\n"
+        # Prefixed string with 'fr' to eliminate Python 3.14 literal syntax warnings
+        msg += fr"{idx}\. `{r['total_elapsed']}` \(Ended: {escape_markdown(format_iso_to_readable(r['stop_time']))}\)\n"
         
     await update.message.reply_text(text=msg, parse_mode="MarkdownV2")
 
